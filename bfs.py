@@ -11,7 +11,7 @@ def read(input_name):
         except PermissionError: # zjistuje pristup k souboru
             print(f"CHYBA: Nemam pristup k {input_name}.Program skonci.")
             exit()
-        except ValueError as e: # validuje i pokud se jedna o validni JSON
+        except ValueError as e: # validuje i pokud se jedna o validni txt
             print(f"CHYBA: Soubor {input_name} neni validni. Program skonci.\n", e)
             exit()
 
