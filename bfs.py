@@ -18,23 +18,23 @@ def read(input_name):
 
 def breadth_first(graph):
     queue = []
-    visited = []
+    visited = [False for i in range(len(graph.vertices))]
     queue.append(graph.first_vertex)
-    visited.append(graph.first_vertex)
+    visited[graph.first_vertex.index] = True
 
     result = [[graph.first_vertex]]
     currentLevel = []
 
-    while len(queue)!=0:
+    while queue:
         vertex = queue.pop(0)
         if vertex in currentLevel:
             result.append(currentLevel)
             currentLevel = []
         
         for neighbour in vertex.neighbours:
-            if neighbour not in visited:
+            if not visited[neighbour.index]:
                 queue.append(neighbour)
-                visited.append(neighbour)
+                visited[neighbour.index] = True
                 currentLevel.append(neighbour)
 
     return result
