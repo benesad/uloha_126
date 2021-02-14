@@ -5,17 +5,17 @@ def read(input_name):
         try:
             with open(input_name, "r", encoding="UTF-8") as physicFile:
                 return physicFile.read().splitlines()
-        except FileNotFoundError: # zjistuje, zda existuje
+        except FileNotFoundError: # try to find out if file exists
             print(f"CHYBA: Pozadovany soubor {input_name} neexistuje. Program skonci.")
             exit()
-        except PermissionError: # zjistuje pristup k souboru
+        except PermissionError: # try to find out if it have an acces
             print(f"CHYBA: Nemam pristup k {input_name}.Program skonci.")
             exit()
-        except ValueError as e: # validuje i pokud se jedna o validni txt
+        except ValueError as e: # try to validate even if its valid
             print(f"CHYBA: Soubor {input_name} neni validni. Program skonci.\n", e)
             exit()
 
-
+# main funtion which made a queue list and then add vertecies 
 def breadth_first(graph):
     queue = []
     visited = [False for i in range(len(graph.vertices))]
@@ -39,9 +39,9 @@ def breadth_first(graph):
 
     return result
 
-
-def save(file_name, tree):
-    try:
+# save file in given conditions
+def save(file_name, tree): 
+    try: 
         with open(file_name, "w", encoding="UTF-8") as physicFile:
             for level_index in range(len(tree)):
                 row_str = ""
@@ -50,7 +50,7 @@ def save(file_name, tree):
                     if row_str=="":
                         row_str = str(vertex.label)
                     else:
-                        row_str += " " + str(vertex.label)
+                        row_str += " " + str(vertex.label) # give space between two numbers in a row
 
                 if level_index!=len(tree)-1:
                     row_str += '\n'
@@ -67,8 +67,8 @@ def save(file_name, tree):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-i', '--input', required=False, default=None)
-parser.add_argument('-o', '--output', required=False, default=None)
+parser.add_argument('-i', '--input', required=False, default=None) # input file as an argument
+parser.add_argument('-o', '--output', required=False, default=None) # output file as an argument
 args = parser.parse_args()
 if args.input != None and args.output != None:
     lines = read(args.input)
